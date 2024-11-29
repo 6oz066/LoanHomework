@@ -18,15 +18,24 @@ def american_loan(amount,rate,month):
     month_payment = amount * rate
     month_payment_list=[]
     month_remain_amount=[]
-    for current_month in range(month-1):
+    for current_month in range(1,month-1):
         month_payment_list.append(month_payment)
         month_remain_amount.append(amount)
     month_payment_list.append(month_payment+amount)
     month_remain_amount.append(0)
     return month_payment_list,month_remain_amount
 
-def italian_loan():
-    pass
+
+def italian_loan(amount,rate,month):
+    month_principal = amount/month
+    month_payment_list = []
+    month_remain_amount=[amount]
+    for current_month in range(1,month):
+        month_payment=month_principal+(amount-current_month*month_principal)*rate
+        month_payment_list.append(month_payment)
+        remain_amount = month_remain_amount[current_month-1]-month_payment
+        month_remain_amount.append(remain_amount)
+
 
 def geometric_loan():
     pass
@@ -49,7 +58,16 @@ print("Please input your amount to lend")
 amount = float(input())
 print("Please input your monthly interest rate")
 rate = float(input())
-print("Please input your month period")
+print("Please input your borrowing period in month")
 month = int(input())
 
 # Method Decision
+if method == 1:
+    french_loan(amount,rate,month)
+elif method == 2:
+    american_loan(amount,rate,month)
+elif method == 3:
+    italian_loan(amount,rate,month)
+elif method == 4:
+    geometric_loan()
+elif method == 5:
