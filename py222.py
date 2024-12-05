@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import xlsxwriter
 
+
 # Definition of the loan method
 def french_loan(amount,rate,month):
     month_payment = (amount * rate *(1+rate)**month)/((1+rate)**month-1)
@@ -83,7 +84,7 @@ def save_to_excel(month):
         for method in range(1,6):
             result = switch_func(amount,rate,month,method)
             df=pd.DataFrame(data=result[1],columns=['Payment'])
-            df.insert(loc=0, value=np.linspace(1,month+1,month),column='Month')
+            df.insert(loc=0, value=np.linspace(1,month+1,month,dtype=int),column='Month')
             df.to_excel(writer,sheet_name= result[0],index=False)
 
 # Insert the information
